@@ -13,7 +13,7 @@ const stats = [
     icon: Calendar,
     value: '5',
     label: 'Events',
-    color: '#0f2a30',
+    color: '#ff5533',
   },
   {
     icon: TrendingUp,
