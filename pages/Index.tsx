@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import HeroSection from '../components/landing/HeroSection';
 import EventsSection from '../components/landing/EventsSection';
-import ClientsSection from '../components/landing/ClientsSection';
+// import ClientsSection from '../components/landing/ClientsSection'; // Temporarily hidden - will re-enable when we have logo permissions
+import StatsSection from '../components/landing/StatsSection';
 import JourneySection from '../components/landing/JourneySection';
 import FinzlySection from '../components/landing/FinzlySection';
 import FinalCTASection from '../components/landing/FinalCTASection';
@@ -41,7 +42,8 @@ const Index: React.FC = () => {
         <main>
             <HeroSection onOpenModal={openModal} />
             <EventsSection />
-            <ClientsSection />
+            <StatsSection />
+            {/* <ClientsSection /> */}
             <JourneySection />
             <FinzlySection />
             <FinalCTASection onOpenModal={openModal} onOpenPastSessions={openPastSessions} />
