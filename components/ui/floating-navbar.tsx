@@ -69,10 +69,13 @@ export const FloatingNav = ({
           className
         )}
       >
-        {/* LOGO */}
-        <div className="flex items-center gap-0.5 font-display font-bold text-lg tracking-tighter text-white mr-2">
+        {/* LOGO - clickable to scroll to top */}
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="flex items-center gap-0.5 font-display font-bold text-lg tracking-tighter text-white mr-2 hover:opacity-80 transition-opacity cursor-pointer"
+        >
             PAYTECH<span className="text-accent">TN</span>
-        </div>
+        </button>
 
         {navItems.map((navItem: any, idx: number) => (
           <a

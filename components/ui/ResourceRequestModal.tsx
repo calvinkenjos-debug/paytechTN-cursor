@@ -74,15 +74,15 @@ export function ResourceRequestModal({
             className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm"
           />
 
-          {/* Modal */}
+          {/* Modal - Properly centered for all screen sizes */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-            className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[60] w-[90%] max-w-md"
+            className="fixed inset-0 z-[60] flex items-center justify-center p-4"
           >
-            <div className="relative rounded-2xl bg-gradient-to-b from-[#0f1a24] to-[#0a0f1a] border border-white/10 shadow-2xl overflow-hidden">
+            <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-[#0f1a24] to-[#0a0f1a] border border-white/10 shadow-2xl overflow-hidden">
               {/* Glow effect */}
               <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#ff5533]/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-[#0f2a30]/40 rounded-full blur-3xl pointer-events-none" />
