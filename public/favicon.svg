@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Dark background -->
+  <rect width="32" height="32" fill="#0a0f1a" rx="6"/>
+  
+  <!-- Orange "P" letter -->
+  <path d="M10 8 L10 24 L10 8 M10 8 L18 8 C20.2 8 22 9.8 22 12 C22 14.2 20.2 16 18 16 L10 16" 
+        stroke="#ff5533" 
+        stroke-width="2.5" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" 
+        fill="none"/>
+</svg>
