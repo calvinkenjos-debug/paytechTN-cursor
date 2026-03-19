@@ -51,8 +51,8 @@ export const createAndNotify = action({
     sessionId: v.string(),
     sessionTitle: v.string(),
   },
-  handler: async (ctx, args) => {
-    const requestId = await ctx.runMutation(api.resourceRequests.create, args);
+  handler: async (ctx, args): Promise<string> => {
+    const requestId: string = await ctx.runMutation(api.resourceRequests.create, args);
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) return requestId;

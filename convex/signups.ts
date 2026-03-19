@@ -52,8 +52,8 @@ export const createAndNotify = action({
     linkedinUrl: v.string(),
     role: v.string(),
   },
-  handler: async (ctx, args) => {
-    const signupId = await ctx.runMutation(api.signups.create, args);
+  handler: async (ctx, args): Promise<string> => {
+    const signupId: string = await ctx.runMutation(api.signups.create, args);
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) return signupId;
