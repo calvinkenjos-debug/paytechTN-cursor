@@ -13,134 +13,155 @@ const topics = [
 
 const EventsSection: React.FC = () => {
   return (
-    <section id="events" className="py-32 px-6 bg-surface border-y border-white/5 relative overflow-hidden">
+    <section id="events" className="py-28 px-6 bg-background border-y border-white/5 relative overflow-hidden">
 
-      {/* Ambient glow behind card */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full bg-accent/8 blur-[140px]" />
+      {/* Ambient glow — orange bleeds from where the image will sit */}
+      <div className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 w-[55%] h-[80%] bg-[#ff5533]/6 blur-[120px] rounded-full" />
+      <div className="pointer-events-none absolute left-[10%] top-1/2 -translate-y-1/2 w-[30%] h-[60%] bg-orange-400/4 blur-[80px] rounded-full" />
 
-      <div className="max-w-5xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
 
-        {/* Section label */}
-        <div className="text-center mb-14">
-          <span className="inline-block font-code text-xs tracking-widest text-accent uppercase mb-5 px-3 py-1 border border-accent/30 rounded-full bg-accent/5">
-            Upcoming Event
-          </span>
-          <h2 className="font-bold text-4xl md:text-5xl text-primary">
-            Upcoming Events
-          </h2>
+        {/* Section eyebrow */}
+        <div className="flex items-center gap-4 mb-14">
+          <span className="font-code text-[11px] tracking-[0.2em] text-accent uppercase">Upcoming Event</span>
+          <div className="h-px flex-1 bg-white/5" />
         </div>
 
-        {/* Main Event Card */}
-        <MotionDiv
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="relative rounded-3xl border border-white/10 bg-[#0a1120] overflow-hidden shadow-2xl shadow-black/60"
-        >
-          {/* Top gradient accent line */}
-          <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
+        {/* Main two-column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-          <div className="grid md:grid-cols-[1fr_420px]">
+          {/* ── LEFT: Event Creative — fully visible square ── */}
+          <MotionDiv
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="relative group"
+          >
+            {/* Glow ring behind image */}
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-[#ff5533]/20 via-orange-400/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-            {/* ── LEFT: Info Panel ── */}
-            <div className="flex flex-col justify-between gap-8 p-8 md:p-12">
-
-              {/* Event type badge */}
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-accent bg-accent/10 border border-accent/20 rounded-full px-3 py-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                  Panel + Mixer
-                </span>
-                <span className="text-[11px] text-white/30 uppercase tracking-widest">In-Person · Chennai</span>
-              </div>
-
-              {/* Title */}
-              <div>
-                <h3 className="font-bold text-3xl md:text-4xl text-white leading-tight mb-3">
-                  Instant Cross-Border<br />
-                  <span className="text-accent">Payments</span>
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed max-w-sm">
-                  Join Chennai's payments community for an evening of practical insights and networking with cross-border payments professionals.
-                </p>
-              </div>
-
-              {/* ── KEY INFO: Date / Time / Location ── */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {/* Date */}
-                <div className="rounded-2xl bg-white/[0.04] border border-white/8 p-4 flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-white/30 font-semibold">Date</span>
-                  <span className="text-2xl font-bold text-white leading-none">March 27</span>
-                  <span className="text-xs text-white/40">Friday, 2026</span>
-                </div>
-                {/* Time */}
-                <div className="rounded-2xl bg-white/[0.04] border border-white/8 p-4 flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-white/30 font-semibold flex items-center gap-1"><Clock size={10} /> Time</span>
-                  <span className="text-2xl font-bold text-white leading-none">5:00 PM</span>
-                  <span className="text-xs text-white/40">IST onwards</span>
-                </div>
-                {/* Location */}
-                <div className="rounded-2xl bg-accent/10 border border-accent/20 p-4 flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-widest text-accent/70 font-semibold flex items-center gap-1"><MapPin size={10} /> Location</span>
-                  <span className="text-lg font-bold text-white leading-tight">StartupTN</span>
-                  <span className="text-xs text-white/40">Chennai, Tamil Nadu</span>
-                </div>
-              </div>
-
-              {/* Topics */}
-              <div>
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-white/30 mb-3">What we'll discuss</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {topics.map((topic) => (
-                    <div key={topic} className="flex items-start gap-2.5 text-sm text-white/65">
-                      <span className="mt-[5px] flex-shrink-0 w-3 h-3 rounded-full bg-accent/15 border border-accent/40 flex items-center justify-center">
-                        <span className="w-1 h-1 rounded-full bg-accent" />
-                      </span>
-                      {topic}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Format row + CTA */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-                <div className="flex gap-5">
-                  <span className="flex items-center gap-1.5 text-xs text-white/40">
-                    <Mic size={12} className="text-accent/60" /> Expert Panel
-                  </span>
-                  <span className="flex items-center gap-1.5 text-xs text-white/40">
-                    <Coffee size={12} className="text-accent/60" /> Networking High-Tea
-                  </span>
-                </div>
-                <a
-                  href="https://luma.com/dalvho7w"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 bg-accent hover:bg-orange-500 text-white font-bold text-sm px-7 py-3.5 rounded-xl transition-all duration-200 shadow-[0_4px_24px_rgba(255,85,51,0.35)] hover:shadow-[0_4px_32px_rgba(255,85,51,0.55)] active:scale-[0.97]"
-                >
-                  Register on Luma
-                  <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-
-            </div>
-
-            {/* ── RIGHT: Event Image ── */}
-            <div className="relative hidden md:block border-l border-white/8">
+            {/* Square image container — aspect-square preserves full image */}
+            <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/8 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
               <img
                 src="/event-cross-border.png"
-                alt="Instant Cross-Border Payments — PayTechTN Panel + Mixer, March 27 2026, Chennai"
-                className="w-full h-full object-cover object-center"
-                style={{ minHeight: '480px' }}
+                alt="Instant Cross-Border Payments — PayTechTN, March 27 2026, Chennai"
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
               />
-              {/* Subtle left fade so image blends into card */}
-              <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a1120] to-transparent pointer-events-none" />
+              {/* Very subtle vignette at bottom so text below reads cleanly */}
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+            </div>
+          </MotionDiv>
+
+          {/* ── RIGHT: Editorial Info Panel ── */}
+          <MotionDiv
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            className="flex flex-col gap-8"
+          >
+            {/* Format badge */}
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 font-code text-[11px] tracking-widest uppercase text-accent border border-accent/25 bg-accent/8 rounded-full px-3 py-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                Panel + Mixer
+              </span>
+              <span className="font-code text-[11px] tracking-widest uppercase text-white/20">· In-Person</span>
             </div>
 
-          </div>
-        </MotionDiv>
+            {/* Title */}
+            <div>
+              <h2 className="font-bold text-3xl lg:text-4xl text-white leading-[1.15] tracking-tight">
+                Instant Cross-Border<br />
+                <span style={{ color: '#ff5533' }}>Payments</span>
+              </h2>
+              <p className="mt-3 text-secondary text-sm leading-relaxed max-w-sm">
+                An evening of practical insights and peer networking with cross-border payments professionals from banks, fintechs, and payment technology leaders.
+              </p>
+            </div>
 
+            {/* ── KEY INFO: Date / Time / Location — Editorial & Prominent ── */}
+            <div className="border-y border-white/5 py-6 space-y-5">
+
+              {/* Date — massive editorial number */}
+              <div className="flex items-baseline gap-4">
+                <span className="font-bold text-[80px] leading-none text-white tracking-tighter select-none" style={{ lineHeight: 1 }}>27</span>
+                <div className="flex flex-col">
+                  <span className="font-bold text-xl text-white">March 2026</span>
+                  <span className="font-code text-xs text-white/30 tracking-widest uppercase">Friday</span>
+                </div>
+              </div>
+
+              {/* Time + Location row */}
+              <div className="grid grid-cols-2 gap-3">
+
+                {/* Time */}
+                <div className="rounded-xl bg-white/[0.03] border border-white/8 p-4">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Clock size={11} className="text-white/30" />
+                    <span className="font-code text-[10px] tracking-widest uppercase text-white/30">Time</span>
+                  </div>
+                  <div className="font-bold text-2xl text-white leading-none">5:00 PM</div>
+                  <div className="text-xs text-white/30 mt-1">IST onwards</div>
+                </div>
+
+                {/* Location — orange highlighted to pop */}
+                <div className="rounded-xl border p-4" style={{ background: 'rgba(255,87,51,0.07)', borderColor: 'rgba(255,87,51,0.2)' }}>
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <MapPin size={11} style={{ color: '#ff5533' }} />
+                    <span className="font-code text-[10px] tracking-widest uppercase" style={{ color: 'rgba(255,87,51,0.6)' }}>Location</span>
+                  </div>
+                  <div className="font-bold text-lg text-white leading-tight">StartupTN</div>
+                  <div className="text-xs text-white/40 mt-1">Chennai, Tamil Nadu</div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Topics */}
+            <div>
+              <p className="font-code text-[10px] tracking-[0.18em] uppercase text-white/25 mb-3">What we'll discuss</p>
+              <div className="space-y-2.5">
+                {topics.map((topic) => (
+                  <div key={topic} className="flex items-center gap-3 text-sm text-white/60">
+                    <span className="flex-shrink-0 w-[5px] h-[5px] rounded-full" style={{ background: '#ff5533' }} />
+                    {topic}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Format tags + CTA */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-5">
+                <span className="flex items-center gap-1.5 text-xs text-white/30">
+                  <Mic size={12} className="text-white/20" /> Expert Panel Discussion
+                </span>
+                <span className="flex items-center gap-1.5 text-xs text-white/30">
+                  <Coffee size={12} className="text-white/20" /> Networking High-Tea
+                </span>
+              </div>
+
+              <a
+                href="https://luma.com/dalvho7w"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2.5 font-bold text-sm text-white px-7 py-4 rounded-full transition-all duration-200 active:scale-[0.97]"
+                style={{
+                  background: '#ff5533',
+                  boxShadow: '0 0 32px rgba(255,87,51,0.35)',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 48px rgba(255,87,51,0.55)')}
+                onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 32px rgba(255,87,51,0.35)')}
+              >
+                Register on Luma
+                <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+              </a>
+            </div>
+
+          </MotionDiv>
+        </div>
       </div>
     </section>
   );
