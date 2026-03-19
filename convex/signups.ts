@@ -26,7 +26,7 @@ export const create = mutation({
       .first();
 
     if (existing) {
-      throw new Error("This email is already registered!");
+      return existing._id as string;
     }
 
     // Insert new sign-up
