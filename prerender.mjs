@@ -143,9 +143,38 @@ async function main() {
 
     writeFileSync(templatePath, html, 'utf-8');
     console.log('✅ Prerender: injected SEO content into dist/index.html');
+
+    // ── IndexNow: notify Bing (and Yandex) of updated content ──
+    const INDEXNOW_KEY = '4ecf6bc8-7e51-4458-a7fa-30c76a79608f';
+    const HOST = 'paytechtn.com';
+    const urls = [
+      `https://${HOST}/`,
+      `https://${HOST}/#events`,
+      `https://${HOST}/#about`,
+    ];
+
+    try {
+      const response = await fetch('https://api.indexnow.org/indexnow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          host: HOST,
+          key: INDEXNOW_KEY,
+          keyLocation: `https://${HOST}/${INDEXNOW_KEY}.txt`,
+          urlList: urls,
+        }),
+      });
+      if (response.ok || response.status === 202) {
+        console.log('✅ IndexNow: submitted', urls.length, 'URLs to Bing/Yandex (status', response.status + ')');
+      } else {
+        console.warn('⚠️  IndexNow: unexpected status', response.status);
+      }
+    } catch (indexNowErr) {
+      console.warn('⚠️  IndexNow submission failed (non-fatal):', indexNowErr.message);
+    }
+
   } catch (err) {
     console.warn('⚠️  Prerender failed (non-fatal):', err.message);
-    // Non-fatal — Vercel build continues even if prerender fails
   }
 }
 
