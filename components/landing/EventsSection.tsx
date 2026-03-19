@@ -28,7 +28,7 @@ const EventsSection: React.FC = () => {
         </div>
 
         {/* Main two-column layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 items-start">
 
           {/* ── LEFT: Event Creative — fully visible square ── */}
           <MotionDiv
@@ -143,21 +143,23 @@ const EventsSection: React.FC = () => {
                 </span>
               </div>
 
-              <a
-                href="https://luma.com/dalvho7w"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2.5 font-bold text-sm text-white px-7 py-4 rounded-full transition-all duration-200 active:scale-[0.97]"
-                style={{
-                  background: '#ff5533',
-                  boxShadow: '0 0 32px rgba(255,87,51,0.35)',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 48px rgba(255,87,51,0.55)')}
-                onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 32px rgba(255,87,51,0.35)')}
-              >
-                Register on Luma
-                <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
-              </a>
+              <div className="flex justify-center">
+                <a
+                  href="https://luma.com/dalvho7w"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center justify-center gap-2.5 font-bold text-sm text-white px-10 py-4 rounded-full transition-all duration-200 active:scale-[0.97]"
+                  style={{
+                    background: '#ff5533',
+                    boxShadow: '0 0 32px rgba(255,87,51,0.35)',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 48px rgba(255,87,51,0.55)')}
+                  onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 32px rgba(255,87,51,0.35)')}
+                >
+                  Register on Luma
+                  <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                </a>
+              </div>
             </div>
 
           </MotionDiv>
