@@ -1,7 +1,15 @@
-import { mutation, query } from "./_generated/server";
+import { mutation, query, action } from "./_generated/server";
 import { v } from "convex/values";
+import { api } from "./_generated/api";
 
-// Mutation to create a new sign-up
+const NOTIFY_EMAILS = [
+  "joseph@paytechtn.com",
+  "pavithra@paytechtn.com",
+  "joseph.calvin@finzly.com",
+  "pavithra.l@finzly.com",
+];
+
+// Mutation to create a new sign-up (used by action and for backwards compatibility)
 export const create = mutation({
   args: {
     fullName: v.string(),
@@ -31,6 +39,50 @@ export const create = mutation({
       createdAt: Date.now(),
     });
 
+    return signupId;
+  },
+});
+
+// Action: create signup + send email to both team addresses
+export const createAndNotify = action({
+  args: {
+    fullName: v.string(),
+    email: v.string(),
+    whatsappNumber: v.string(),
+    linkedinUrl: v.string(),
+    role: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const signupId = await ctx.runMutation(api.signups.create, args);
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) return signupId;
+
+    const from = process.env.RESEND_FROM_EMAIL ?? "PayTechTN <onboarding@resend.dev>";
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        from,
+        to: NOTIFY_EMAILS,
+        subject: `[PayTechTN] New community signup: ${args.fullName}`,
+        html: `
+          <h2>New signup</h2>
+          <p><strong>Name:</strong> ${args.fullName}</p>
+          <p><strong>Email:</strong> ${args.email}</p>
+          <p><strong>WhatsApp:</strong> ${args.whatsappNumber}</p>
+          <p><strong>LinkedIn:</strong> <a href="${args.linkedinUrl}">${args.linkedinUrl}</a></p>
+          <p><strong>Role:</strong> ${args.role}</p>
+        `,
+      }),
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      console.error("Resend signup email failed:", res.status, err);
+    }
     return signupId;
   },
 });

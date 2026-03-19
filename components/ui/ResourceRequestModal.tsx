@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, Loader2, CheckCircle, Sparkles } from "lucide-react";
-import { useMutation } from "convex/react";
+import { useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 
 interface ResourceRequestModalProps {
@@ -22,7 +22,7 @@ export function ResourceRequestModal({
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  const createResourceRequest = useMutation(api.resourceRequests.create);
+  const createResourceRequest = useAction(api.resourceRequests.createAndNotify);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

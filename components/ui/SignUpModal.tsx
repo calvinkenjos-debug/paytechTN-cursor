@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Mail, Phone, Briefcase, User, Link, CheckCircle, Loader2 } from 'lucide-react';
-import { useMutation } from 'convex/react';
+import { useAction } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 
 interface SignUpModalProps {
@@ -21,8 +21,8 @@ export const SignUpModal: React.FC<SignUpModalProps> = ({ isOpen, onClose }) => 
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  // Convex mutation to create a signup
-  const createSignup = useMutation(api.signups.create);
+  // Convex action: create signup + email joseph@ & pavithra@
+  const createSignup = useAction(api.signups.createAndNotify);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
