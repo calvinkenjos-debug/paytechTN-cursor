@@ -21,9 +21,9 @@ const EventsSection: React.FC = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
 
-        {/* Section eyebrow */}
-        <div className="flex items-center gap-4 mb-14">
-          <span className="font-code text-[11px] tracking-[0.2em] text-accent uppercase">Upcoming Event</span>
+        {/* Section heading */}
+        <div className="flex items-center gap-6 mb-14">
+          <h2 className="font-bold text-4xl md:text-5xl text-white whitespace-nowrap">Upcoming Events</h2>
           <div className="h-px flex-1 bg-white/5" />
         </div>
 
