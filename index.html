@@ -68,6 +68,7 @@
             },
             animation: {
               "shimmer": "shimmer 8s infinite",
+              "shiny-text": "shiny-text 8s infinite",
             },
             keyframes: {
               "shimmer": {
@@ -76,6 +77,14 @@
                 },
                 "30%, 60%": {
                   "background-position": "calc(100% + var(--shimmer-width)) 0",
+                },
+              },
+              "shiny-text": {
+                "0%, 90%, 100%": {
+                  "background-position": "calc(-100% - var(--shiny-width)) 0",
+                },
+                "30%, 60%": {
+                  "background-position": "calc(100% + var(--shiny-width)) 0",
                 },
               },
             },
