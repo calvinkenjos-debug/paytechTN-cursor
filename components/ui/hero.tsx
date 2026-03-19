@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { AvatarCircles } from "./avatar-circles"
 import { cn } from "../../lib/utils"
 import { ShaderGradientBackground } from "./shader-gradient-background"
+import { AnimatedShinyText } from "./animated-shiny-text"
 
 interface ShaderShowcaseProps {
   onOpenModal?: () => void;
@@ -51,23 +52,40 @@ export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
       <div className="absolute inset-0 z-[6] opacity-15 pointer-events-none tech-grid" />
 
       <main className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 sm:pt-20 pb-8 sm:pb-0">
-        <div className="text-left max-w-4xl">
-          <motion.div
-            className="flex items-center justify-start mb-4 sm:mb-6 md:mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+
+        {/* Centered announcement banner */}
+        <motion.div
+          className="flex justify-center mb-10 sm:mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <button
+            onClick={() => {
+              const el = document.getElementById('events');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            className={cn(
+              "group rounded-full border border-white/10 bg-neutral-900/80 backdrop-blur-md hover:bg-neutral-800 transition-all ease-in hover:cursor-pointer"
+            )}
           >
-            <div
-              className={cn(
-                "rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-3 sm:px-4 py-1 sm:py-1.5 shadow-sm"
-              )}
+            <AnimatedShinyText
+              shimmerWidth={220}
+              className="inline-flex items-center justify-center gap-2.5 px-5 py-2 text-sm transition ease-out hover:text-white hover:duration-300"
             >
-              <span className="text-white font-medium flex items-center gap-2 text-sm sm:text-base">
-                ✨ The Winning Combo
+              <span className="inline-block w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: '#ff5533' }} />
+              <span className="font-medium text-white/80">
+                🎤 Next Event:&nbsp;
+                <span className="text-white font-semibold">Instant Cross-Border Payments</span>
+                <span className="text-white/30 mx-2">·</span>
+                <span className="font-code text-xs tracking-wide" style={{ color: '#ff5533' }}>Mar 27 · 5 PM · Chennai</span>
               </span>
-            </div>
-          </motion.div>
+              <ArrowRight size={13} className="text-white/40 transition-transform duration-300 group-hover:translate-x-0.5 flex-shrink-0" />
+            </AnimatedShinyText>
+          </button>
+        </motion.div>
+
+        <div className="text-left max-w-4xl">
 
           {/* HEADLINE: Optimized typography following UI/UX best practices */}
           <div className="mb-5 md:mb-6 text-white">
