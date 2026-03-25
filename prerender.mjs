@@ -40,7 +40,17 @@ globalThis.document = {
   body: { appendChild: () => {}, style: {} },
 };
 
-globalThis.navigator = { userAgent: 'node', language: 'en' };
+// Node.js v24+ exposes `navigator` as a read-only getter on globalThis.
+// Use defineProperty so we can override it safely without throwing.
+try {
+  Object.defineProperty(globalThis, 'navigator', {
+    value: { userAgent: 'node', language: 'en', onLine: true },
+    writable: true,
+    configurable: true,
+  });
+} catch {
+  // If it can't be overridden at all, just proceed — it won't affect prerender output
+}
 globalThis.HTMLElement = class HTMLElement {};
 globalThis.HTMLCanvasElement = class HTMLCanvasElement {
   getContext() { return null; }
