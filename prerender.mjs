@@ -238,12 +238,13 @@ async function main() {
     console.log('✅ Prerender: injected SEO content into dist/index.html');
 
     // ── IndexNow: notify Bing (and Yandex) of updated content ──
+    // IMPORTANT: Never include # fragment URLs — Google/Bing strip the fragment
+    // and treat them as duplicates of the root URL, causing redirect/alternate
+    // indexing errors in Search Console. Only submit real indexable URLs.
     const INDEXNOW_KEY = '4ecf6bc8-7e51-4458-a7fa-30c76a79608f';
     const HOST = 'paytechtn.com';
     const urls = [
       `https://${HOST}/`,
-      `https://${HOST}/#events`,
-      `https://${HOST}/#about`,
     ];
 
     try {
