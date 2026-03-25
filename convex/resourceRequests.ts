@@ -3,7 +3,7 @@ import { v } from "convex/values";
 import { api } from "./_generated/api";
 
 const NOTIFY_EMAILS = [
-  "joseph@paytechtn.com",
+  "joseph.calvin@paytechtn.com",
   "pavithra@paytechtn.com",
   "joseph.calvin@finzly.com",
   "pavithra.l@finzly.com",
