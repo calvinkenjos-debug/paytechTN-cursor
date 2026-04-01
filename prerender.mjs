@@ -110,7 +110,6 @@ async function main() {
 
     <!-- ── HERO: Definition block for "What is PayTechTN?" queries ── -->
     <section>
-      <p aria-label="announcement">Next Event: Instant Cross-Border Payments · March 27, 2026 · 5:00 PM IST · StartupTN Office, Chennai</p>
       <h1>Fintech Community Chennai — Where Payments &amp; Banking Leaders Connect</h1>
 
       <!-- Definition block (40-60 words — optimal for AI snippet extraction) -->
@@ -119,50 +118,20 @@ async function main() {
       <!-- Statistics block (+37% AI citation boost per Princeton GEO research) -->
       <ul aria-label="Community statistics">
         <li>500+ payments and banking professionals in the community</li>
-        <li>5 events held since founding, covering AI in payments, QA for instant payments, vibe coding, and cross-border payments</li>
+        <li>6 events held since founding, covering AI in payments, instant cross-border payments, QA for instant payments, vibe coding, and AI-powered QA</li>
         <li>20+ industry leaders have spoken at PayTechTN events</li>
         <li>Members from banks, fintechs, and payment technology companies across Tamil Nadu</li>
       </ul>
 
-      <a href="#events">Explore Upcoming Events</a>
+      <a href="#about">Learn More About the Community</a>
       <a href="#join">Join the Community — Free</a>
-    </section>
-
-    <!-- ── UPCOMING EVENT ── -->
-    <section id="events">
-      <h2>Upcoming Fintech Event in Chennai — March 2026</h2>
-      <article itemscope itemtype="https://schema.org/Event">
-        <h3 itemprop="name">Instant Cross-Border Payments — Panel Discussion &amp; Networking Mixer</h3>
-        <p itemprop="description">An evening of practical insights and peer networking with cross-border payments professionals from banks, fintechs, and payment technology leaders in Chennai.</p>
-
-        <!-- Key facts prominent for featured snippets -->
-        <dl>
-          <dt>Date</dt><dd itemprop="startDate" content="2026-03-27T17:00:00+05:30">Friday, March 27, 2026</dd>
-          <dt>Time</dt><dd>5:00 PM IST onwards</dd>
-          <dt>Location</dt><dd itemprop="location">StartupTN Office, Nandanam, Chennai, Tamil Nadu 600035</dd>
-          <dt>Format</dt><dd>In-person panel discussion + networking high-tea</dd>
-          <dt>Cost</dt><dd>Free to attend</dd>
-        </dl>
-
-        <h4>What will be discussed at this Chennai fintech event?</h4>
-        <ul>
-          <li>SWIFT GPI and emerging cross-border payment rails — speed, cost, and liquidity realities</li>
-          <li>Real-time settlement challenges for international money movement</li>
-          <li>FX liquidity management and global interoperability</li>
-          <li>Bank implementation strategies from practitioners building at scale</li>
-        </ul>
-
-        <h4>Who should attend?</h4>
-        <p>Payments professionals, treasury heads, fintech product managers, bank operations leads, and consultants working on international money movement in Tamil Nadu and across India.</p>
-
-        <a href="https://luma.com/dalvho7w" itemprop="url">Register for Instant Cross-Border Payments Event on Luma</a>
-      </article>
     </section>
 
     <!-- ── PAST SESSIONS ── -->
     <section>
       <h2>Past PayTechTN Events</h2>
       <ul>
+        <li><strong>Instant Cross-Border Payments — Panel Discussion &amp; Networking Mixer</strong> — March 27, 2026 · In-Person · Chennai, StartupTN · Panel discussion on SWIFT GPI, real-time settlement realities, FX liquidity challenges, and bank implementation strategies from practitioners building at scale</li>
         <li><strong>AI in Payments: Beyond Fraud Detection</strong> — May 30, 2025 · In-Person · Chennai, StartupTN · 40+ operators and builders discussing AI use cases in routing, reconciliation, and support workflows</li>
         <li><strong>QA for Instant Payments</strong> — July 22, 2025 · Virtual Workshop · AI-assisted testing strategies for payment systems</li>
         <li><strong>Vibe Coding: Shipping Faster with AI &amp; Low-Code</strong> — August 12, 2025 · Virtual · Teams cut prototype time from weeks to days using AI scaffolding</li>

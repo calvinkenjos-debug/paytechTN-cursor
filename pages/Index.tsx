@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import HeroSection from '../components/landing/HeroSection';
-import EventsSection from '../components/landing/EventsSection';
 // import ClientsSection from '../components/landing/ClientsSection'; // Temporarily hidden - will re-enable when we have logo permissions
 import StatsSection from '../components/landing/StatsSection';
 import JourneySection from '../components/landing/JourneySection';
@@ -11,7 +10,7 @@ import { SignUpModal } from '../components/ui/SignUpModal';
 import { PreviousSessionsModal } from '../components/ui/PreviousSessionsModal';
 import { CodeOfConductModal } from '../components/ui/CodeOfConductModal';
 import { FloatingNav } from '../components/ui/floating-navbar';
-import { User, Calendar } from 'lucide-react';
+import { User } from 'lucide-react';
 
 const Index: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,11 +27,6 @@ const Index: React.FC = () => {
       link: "#about",
       icon: <User className="h-4 w-4" />,
     },
-    {
-      name: "Events",
-      link: "#events",
-      icon: <Calendar className="h-4 w-4" />,
-    },
   ];
 
   return (
@@ -41,7 +35,6 @@ const Index: React.FC = () => {
 
         <main>
             <HeroSection onOpenModal={openModal} />
-            <EventsSection />
             <StatsSection />
             {/* <ClientsSection /> */}
             <JourneySection />

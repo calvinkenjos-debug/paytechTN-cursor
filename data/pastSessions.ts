@@ -2,6 +2,15 @@ import { CardStackItem } from "../components/ui/card-stack";
 
 export const pastSessions: CardStackItem[] = [
   {
+    id: "instant-cross-border-payments",
+    title: "Instant Cross-Border Payments",
+    description: "An evening of practical insights and peer networking with cross-border payments professionals from banks, fintechs, and payment technology leaders. Panel discussion on SWIFT GPI, real-time settlement realities, FX liquidity challenges, and bank implementation strategies.",
+    date: "27 Mar 2026",
+    format: "In-Person • Chennai",
+    imageSrc: "/event-cross-border.png",
+    href: "#",
+  },
+  {
     id: "ai-in-payments",
     title: "AI in Payments: Beyond Fraud Detection",
     description: "See how leading teams use AI across routing, operations, and reliability — not just fraud. Panel discussion with payments product leaders and architects.",

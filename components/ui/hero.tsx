@@ -3,9 +3,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { AvatarCircles } from "./avatar-circles"
-import { cn } from "../../lib/utils"
 import { ShaderGradientBackground } from "./shader-gradient-background"
-import { AnimatedShinyText } from "./animated-shiny-text"
 
 interface ShaderShowcaseProps {
   onOpenModal?: () => void;
@@ -52,38 +50,6 @@ export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
       <div className="absolute inset-0 z-[6] opacity-15 pointer-events-none tech-grid" />
 
       <main className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 sm:pt-20 pb-8 sm:pb-0">
-
-        {/* Centered announcement banner */}
-        <motion.div
-          className="flex justify-center mb-10 sm:mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <button
-            onClick={() => {
-              const el = document.getElementById('events');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className={cn(
-              "group rounded-full border border-white/10 bg-neutral-900/80 backdrop-blur-md hover:bg-neutral-800 transition-all ease-in hover:cursor-pointer"
-            )}
-          >
-            <AnimatedShinyText
-              shimmerWidth={220}
-              className="inline-flex items-center justify-center gap-2.5 px-5 py-2 text-sm transition ease-out hover:text-white hover:duration-300"
-            >
-              <span className="inline-block w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: '#ff5533' }} />
-              <span className="font-medium text-white/80">
-                🎤 Next Event:&nbsp;
-                <span className="text-white font-semibold">Instant Cross-Border Payments</span>
-                <span className="text-white/30 mx-2">·</span>
-                <span className="font-code text-xs tracking-wide" style={{ color: '#ff5533' }}>Mar 27 · 5 PM · Chennai</span>
-              </span>
-              <ArrowRight size={13} className="text-white/40 transition-transform duration-300 group-hover:translate-x-0.5 flex-shrink-0" />
-            </AnimatedShinyText>
-          </button>
-        </motion.div>
 
         <div className="text-left max-w-4xl">
 
@@ -140,13 +106,13 @@ export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                const eventsSection = document.getElementById('events');
-                if (eventsSection) {
-                  eventsSection.scrollIntoView({ behavior: 'smooth' });
+                const aboutSection = document.getElementById('about');
+                if (aboutSection) {
+                  aboutSection.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
             >
-              Explore Events
+              Learn More
             </motion.button>
           </motion.div>
         </div>
