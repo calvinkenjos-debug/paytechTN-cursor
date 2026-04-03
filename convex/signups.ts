@@ -9,6 +9,48 @@ const NOTIFY_EMAILS = [
   "pavithra.l@finzly.com",
 ];
 
+// Validation helper (server-side validation)
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+function validateName(name: string): boolean {
+  const nameRegex = /^[a-zA-Z\s\-'.]+$/;
+  return name.length >= 2 && name.length <= 100 && nameRegex.test(name);
+}
+
+function validatePhone(phone: string): boolean {
+  const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+  return phoneRegex.test(phone);
+}
+
+function validateUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:') && url.length <= 2048;
+  } catch {
+    return false;
+  }
+}
+
+function validateRole(role: string): boolean {
+  const roleRegex = /^[a-zA-Z0-9\s\-,./()&]+$/;
+  return role.length >= 2 && role.length <= 150 && roleRegex.test(role);
+}
+
+// XSS prevention: escape HTML special characters
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 // Mutation to create a new sign-up (used by action and for backwards compatibility)
 export const create = mutation({
   args: {
@@ -19,23 +61,43 @@ export const create = mutation({
     role: v.string(),
   },
   handler: async (ctx, args) => {
+    // Server-side validation
+    if (!validateEmail(args.email)) {
+      throw new Error("Invalid email format");
+    }
+    if (!validateName(args.fullName)) {
+      throw new Error("Invalid name format");
+    }
+    if (!validatePhone(args.whatsappNumber)) {
+      throw new Error("Invalid phone number format");
+    }
+    if (!validateUrl(args.linkedinUrl)) {
+      throw new Error("Invalid LinkedIn URL");
+    }
+    if (!validateRole(args.role)) {
+      throw new Error("Invalid role format");
+    }
+
     // Check if email already exists
     const existing = await ctx.db
       .query("signups")
-      .withIndex("by_email", (q) => q.eq("email", args.email))
+      .withIndex("by_email", (q) => q.eq("email", args.email.toLowerCase()))
       .first();
 
     if (existing) {
       return existing._id as string;
     }
 
+    // Sanitize inputs before storing (remove control characters)
+    const sanitize = (str: string) => str.replace(/[\x00-\x1F\x7F-\x9F]/g, '').trim();
+
     // Insert new sign-up
     const signupId = await ctx.db.insert("signups", {
-      fullName: args.fullName,
-      email: args.email,
-      whatsappNumber: args.whatsappNumber,
-      linkedinUrl: args.linkedinUrl,
-      role: args.role,
+      fullName: sanitize(args.fullName),
+      email: args.email.toLowerCase().trim(),
+      whatsappNumber: sanitize(args.whatsappNumber),
+      linkedinUrl: args.linkedinUrl.trim(),
+      role: sanitize(args.role),
       createdAt: Date.now(),
     });
 
@@ -58,7 +120,12 @@ export const createAndNotify = action({
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) return signupId;
 
-    const firstName = args.fullName.split(' ')[0];
+    const firstName = escapeHtml(args.fullName.split(' ')[0]);
+    const safeName = escapeHtml(args.fullName);
+    const safeEmail = escapeHtml(args.email);
+    const safePhone = escapeHtml(args.whatsappNumber);
+    const safeLinkedIn = escapeHtml(args.linkedinUrl);
+    const safeRole = escapeHtml(args.role);
 
     // 1. Send admin notification email
     const from = process.env.RESEND_FROM_EMAIL ?? "PayTechTN <onboarding@resend.dev>";
@@ -71,14 +138,14 @@ export const createAndNotify = action({
       body: JSON.stringify({
         from,
         to: NOTIFY_EMAILS,
-        subject: `[PayTechTN] New community signup: ${args.fullName}`,
+        subject: `[PayTechTN] New community signup: ${safeName}`,
         html: `
           <h2>New signup</h2>
-          <p><strong>Name:</strong> ${args.fullName}</p>
-          <p><strong>Email:</strong> ${args.email}</p>
-          <p><strong>WhatsApp:</strong> ${args.whatsappNumber}</p>
-          <p><strong>LinkedIn:</strong> <a href="${args.linkedinUrl}">${args.linkedinUrl}</a></p>
-          <p><strong>Role:</strong> ${args.role}</p>
+          <p><strong>Name:</strong> ${safeName}</p>
+          <p><strong>Email:</strong> ${safeEmail}</p>
+          <p><strong>WhatsApp:</strong> ${safePhone}</p>
+          <p><strong>LinkedIn:</strong> <a href="${safeLinkedIn}">${safeLinkedIn}</a></p>
+          <p><strong>Role:</strong> ${safeRole}</p>
         `,
       }),
     });

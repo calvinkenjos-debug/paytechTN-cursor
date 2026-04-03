@@ -13,6 +13,8 @@
     "clsx": "2.1.1",
     "convex": "^1.31.7",
     "framer-motion": "11.0.8",
+    "html-escaper": "^3.0.3",
+    "joi": "^18.1.2",
     "lucide-react": "0.344.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
