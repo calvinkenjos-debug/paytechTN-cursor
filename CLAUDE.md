@@ -4,6 +4,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ---
 
+## Quick Reference
+
+**What is this?** A landing page website for the PayTechTN community platform built with React + Vite + Convex.
+
+**Core Stack**: React 19 • Vite 6 • Convex • Tailwind CSS • TypeScript
+
+**Key Pattern**: Single landing page (`pages/Index.tsx`) composed from reusable section components in `components/landing/`.
+
+**Database**: Convex (serverless BaaS) with two tables: `signups` (community registrations) and `resourceRequests` (event resource requests).
+
+**Deployment**: Vercel + static prerendering for SEO (runs after build).
+
+**Quick Commands**:
+- `npm run dev` — Start dev server on port 3000
+- `npm run build` — Build + prerender to static HTML
+- Add events → Edit `data/pastSessions.ts`
+- Update backend → Edit `convex/` + run `npx convex dev`
+
+---
+
+## Table of Contents
+1. [Quick Start](#quick-start)
+2. [Architecture Overview](#architecture-overview)
+3. [Database Schema](#database-schema--convex)
+4. [Validation & Security](#validation--security)
+5. [Common Tasks](#common-tasks)
+6. [Styling System](#styling-system)
+7. [Deployment](#deployment)
+8. [Performance Notes](#performance-notes)
+9. [Debugging Tips](#debugging-tips)
+10. [Key Files](#key-files-to-know)
+
+---
+
 ## Quick Start
 
 ### Prerequisites
@@ -235,22 +269,68 @@ mutation.mutate(value);  // Fires Convex mutation
 
 ## Key Files to Know
 
-| File | Purpose |
-|------|---------|
-| `pages/Index.tsx` | Main landing page; orchestrates all section components |
-| `convex/schema.ts` | Database tables and indexes |
-| `lib/validation.ts` | Input validation schemas and sanitizers |
-| `data/pastSessions.ts` | Static event data; source of truth for sessions |
-| `prerender.mjs` | Runs after build to generate static HTML for SEO |
-| `vite.config.ts` | Vite build config; defines port 3000, React plugin, path alias |
+| File | Purpose | When to Edit |
+|------|---------|--------------|
+| `pages/Index.tsx` | Main landing page; orchestrates all section components | Layout changes, new sections |
+| `components/landing/*` | Page section components (Hero, Journey, Stats, etc.) | Section content updates |
+| `components/ui/*` | Reusable UI components (modals, buttons, cards) | Shared component logic |
+| `convex/schema.ts` | Database tables and indexes | Add/modify user data fields |
+| `convex/signups.ts` | Signup mutations and queries | User registration logic |
+| `convex/resourceRequests.ts` | Resource request functions | Event resource requests |
+| `lib/validation.ts` | Input validation schemas and sanitizers | Form field validation rules |
+| `data/pastSessions.ts` | Static event/session data | Add/update events |
+| `prerender.mjs` | Runs after build to generate static HTML for SEO | Prerendering issues |
+| `vite.config.ts` | Vite build config; defines port 3000, React plugin, path alias | Build configuration |
+| `tsconfig.json` | TypeScript compiler options | Type checking rules |
+| `.env.example` | Environment variable template | Reference for required vars |
+
+---
+
+## File Navigation by Use Case
+
+**"I need to update event content"**
+- Edit `data/pastSessions.ts` (add/remove events)
+- Update component text in `components/landing/EventsSection.tsx`
+- Run `npm run build` to prerender
+
+**"I need to modify the signup form"**
+- Update form UI in `components/ui/SignUpModal.tsx`
+- Update validation schema in `lib/validation.ts`
+- Update Convex mutation in `convex/signups.ts` if DB fields change
+- Update `convex/schema.ts` if adding new fields
+
+**"I need to add a new page section"**
+- Create new `.tsx` file in `components/landing/`
+- Import and add to `pages/Index.tsx`
+- Style with Tailwind classes
+
+**"I need to fix a styling issue"**
+- Check `components/ui/*` for component-specific styles
+- Check `vite.config.ts` for global CSS
+- Use Tailwind classes; avoid inline `<style>` tags
+
+**"I need to deploy changes"**
+- Ensure `.env.local` has correct `VITE_CONVEX_URL`
+- Run `npm run build` locally to verify prerendering
+- Push to git; Vercel auto-deploys on main branch
+
+---
+
+## Common Gotchas
+
+1. **Prerendering fails silently**: Check browser console for React errors. The prerender script catches errors but may not show them.
+2. **Convex functions not updating**: Run `npx convex dev` or `npx convex deploy` to sync backend. Auto-generated stubs in `_generated/` won't update without this.
+3. **Form validation errors not showing**: Check both client-side (Joi in `lib/validation.ts`) and server-side (Convex validators).
+4. **Images not loading**: Use relative paths `/filename` for files in `public/` or full HTTPS URLs. Avoid relative imports.
+5. **Environment variables not working**: Must restart dev server after updating `.env.local`. Vite reads env vars at build time.
 
 ---
 
 ## Related Resources
 
-- [Convex Docs](https://docs.convex.dev) — Database, mutations, queries
-- [Vite Docs](https://vitejs.dev) — Build tool, SSR/prerendering
-- [Tailwind CSS](https://tailwindcss.com) — Styling
-- [Joi Validation](https://joi.dev) — Input validation
-- [Framer Motion](https://www.framer.com/motion) — Animations
-- [Claude.md for PayTechTN Community](./claude.md) — Community platform management guidelines
+- [Convex Docs](https://docs.convex.dev) — Database, mutations, queries, deployment
+- [Vite Docs](https://vitejs.dev) — Build tool, SSR/prerendering, dev server
+- [Tailwind CSS](https://tailwindcss.com) — Utility-first CSS framework
+- [Joi Validation](https://joi.dev) — Input validation schemas
+- [Framer Motion](https://www.framer.com/motion) — React animation library
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/) — Type system reference
