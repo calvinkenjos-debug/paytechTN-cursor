@@ -193,7 +193,7 @@ async function main() {
     </address>
     <nav aria-label="Footer navigation">
       <a href="https://www.linkedin.com/company/paytechtn/">LinkedIn</a>
-      <a href="https://paytechtn.com/sitemap.xml">Sitemap</a>
+      <a href="https://www.paytechtn.com/sitemap.xml">Sitemap</a>
     </nav>
     <p>Last updated: March 2026</p>
   </footer>
@@ -211,7 +211,7 @@ async function main() {
     // and treat them as duplicates of the root URL, causing redirect/alternate
     // indexing errors in Search Console. Only submit real indexable URLs.
     const INDEXNOW_KEY = '4ecf6bc8-7e51-4458-a7fa-30c76a79608f';
-    const HOST = 'paytechtn.com';
+    const HOST = 'www.paytechtn.com';
     const urls = [
       `https://${HOST}/`,
     ];

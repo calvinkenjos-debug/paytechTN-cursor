@@ -31,7 +31,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://luma.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.convex.cloud https://api.resend.com https://chat.whatsapp.com https://www.linkedin.com https://luma.com https://api.indexnow.org; frame-src https://luma.com; object-src 'none'; base-uri 'self'; form-action 'self';"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://luma.com https://embed.lu.ma; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://*.convex.cloud https://api.resend.com https://chat.whatsapp.com https://www.linkedin.com https://luma.com https://lu.ma https://embed.lu.ma https://api.indexnow.org; frame-src https://luma.com https://lu.ma https://embed.lu.ma; object-src 'none'; base-uri 'self'; form-action 'self';"
         }
       ]
     }

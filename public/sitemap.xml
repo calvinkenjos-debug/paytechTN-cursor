@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://paytechtn.com/</loc>
+    <loc>https://www.paytechtn.com/</loc>
     <lastmod>2026-03-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://paytechtn.com/event-cross-border.png</image:loc>
+      <image:loc>https://www.paytechtn.com/event-cross-border.png</image:loc>
       <image:title>Instant Cross-Border Payments — PayTechTN Event, March 27 2026, Chennai</image:title>
       <image:caption>Panel Discussion and Networking Mixer on cross-border payments, SWIFT GPI, real-time settlement and FX liquidity</image:caption>
     </image:image>

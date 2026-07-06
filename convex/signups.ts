@@ -217,7 +217,7 @@ export const createAndNotify = action({
             </p>
 
             <p style="font-size: 12px; color: #999; margin-top: 24px;">
-              <a href="https://paytechtn.com" style="color: #ff5533; text-decoration: none;">paytechtn.com</a> · 
+              <a href="https://www.paytechtn.com" style="color: #ff5533; text-decoration: none;">paytechtn.com</a> · 
               <a href="https://www.linkedin.com/company/paytechtn/" style="color: #ff5533; text-decoration: none;">LinkedIn</a> · 
               <a href="mailto:paytechtn@gmail.com" style="color: #ff5533; text-decoration: none;">paytechtn@gmail.com</a>
             </p>

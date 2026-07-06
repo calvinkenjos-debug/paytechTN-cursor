@@ -1,23 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, Video, Calendar, ArrowUpRight } from 'lucide-react';
+import { Clock, Video, Calendar, ArrowUpRight, Check } from 'lucide-react';
 
 const MotionDiv = motion.div as any;
 
 /**
- * Luma registration embed.
+ * Luma registration.
  *
  * Once the Luma event page is live, set LUMA_EVENT_ID to its API id
  * (found in Luma → Event → Settings → "Embed", it looks like `evt-xxxxxxxx`).
- * While it's empty the section renders a "registration opening soon" state
- * instead of a broken iframe, so this is safe to ship before the page exists.
+ * While it's empty the section renders a "registration opening soon" state.
+ *
+ * Uses Luma's checkout-button overlay (script loaded in index.html) rather
+ * than the boxed "simple" iframe: the iframe's registration page (8 custom
+ * questions) renders taller than any fixed height, forcing an ugly nested
+ * scrollbar. The overlay button has no height to guess and opens Luma's own
+ * checkout as a full modal instead.
  */
 const LUMA_EVENT_ID = 'evt-Uu241H0X6C9cLV2';
+const LUMA_EVENT_URL = `https://luma.com/event/${LUMA_EVENT_ID}`;
 
 const highlights = [
   'Real Agentic AI use cases in payments — from investigations and exception handling to embedded payments.',
   'Practitioners from banking and fintech, grounded in what they have actually shipped.',
   'No hype, no slideware about the future. Just what is working today.',
+];
+
+const included = [
+  'Free to attend',
+  'Zoom link + calendar invite by email',
+  'Zoom capacity 75–100 — register early',
 ];
 
 const UpcomingEventSection: React.FC = () => {
@@ -151,61 +163,64 @@ const UpcomingEventSection: React.FC = () => {
             {/* Glow behind the card */}
             <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-accent/20 via-orange-400/10 to-transparent blur-2xl opacity-60" />
 
-            <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-5 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
-              <div className="flex items-center gap-2 mb-4 px-1">
+            <div className="relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-7 lg:p-8 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
+              <div className="flex items-center gap-2 mb-6">
                 <Calendar size={13} className="text-accent" />
                 <span className="font-code text-[11px] tracking-widest uppercase text-white/50">
-                  Register — free seats are limited
+                  Save your seat
                 </span>
               </div>
 
+              <p className="text-white text-lg font-bold leading-snug">
+                Takes less than a minute.
+              </p>
+              <p className="text-secondary text-sm mt-2 leading-relaxed">
+                You'll get a confirmation email with the Zoom link. Miss it and
+                you can still catch the whole session live on LinkedIn.
+              </p>
+
+              <div className="mt-7 space-y-3">
+                {included.map((item) => (
+                  <div key={item} className="flex items-center gap-2.5 text-sm text-white/60">
+                    <Check size={14} className="flex-shrink-0 text-accent" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+
               {LUMA_EVENT_ID ? (
-                <iframe
-                  title="Register for Rise of AI in Payments on Luma"
-                  src={`https://luma.com/embed/event/${LUMA_EVENT_ID}/simple`}
-                  width="100%"
-                  height="520"
-                  frameBorder="0"
-                  style={{ border: 'none', borderRadius: '12px' }}
-                  allow="fullscreen; payment"
-                  aria-hidden="false"
-                  tabIndex={0}
-                  className="w-full rounded-xl bg-white"
-                />
+                <motion.a
+                  href={LUMA_EVENT_URL}
+                  data-luma-action="checkout"
+                  data-luma-event-id={LUMA_EVENT_ID}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileTap={{ scale: 0.97 }}
+                  className="group mt-7 flex w-full items-center justify-center gap-2.5 rounded-full bg-accent px-6 py-4 font-bold text-sm text-white transition-shadow duration-200"
+                  style={{ boxShadow: '0 0 32px rgba(255,87,51,0.35)' }}
+                  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) =>
+                    (e.currentTarget.style.boxShadow = '0 0 48px rgba(255,87,51,0.55)')
+                  }
+                  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) =>
+                    (e.currentTarget.style.boxShadow = '0 0 32px rgba(255,87,51,0.35)')
+                  }
+                >
+                  Reserve My Seat
+                  <ArrowUpRight
+                    size={15}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                  />
+                </motion.a>
               ) : (
                 /* Fallback shown until the Luma event id is set */
-                <div className="flex flex-col items-center justify-center text-center gap-4 rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-14">
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-accent/10 border border-accent/20">
-                    <Calendar size={20} className="text-accent" />
-                  </span>
-                  <div>
-                    <p className="font-bold text-white text-lg">Registration opening soon</p>
-                    <p className="text-secondary text-sm mt-1 max-w-xs">
-                      The Luma registration form will appear here. Join the community
-                      below and we'll send you the link the moment it's live.
-                    </p>
-                  </div>
-                  <a
-                    href="https://luma.com/event/evt-Uu241H0X6C9cLV2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 font-bold text-sm text-white px-6 py-3 rounded-full bg-accent transition-all duration-200 active:scale-[0.97]"
-                    style={{ boxShadow: '0 0 28px rgba(255,87,51,0.3)' }}
-                  >
-                    View on Luma
-                    <ArrowUpRight
-                      size={14}
-                      className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
-                    />
-                  </a>
+                <div className="mt-7 flex flex-col items-center text-center gap-3 rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-6 py-8">
+                  <p className="font-bold text-white text-sm">Registration opening soon</p>
+                  <p className="text-secondary text-xs max-w-xs">
+                    Check back shortly, or watch this space — we'll post the link here first.
+                  </p>
                 </div>
               )}
             </div>
-
-            <p className="text-center text-xs text-white/30 mt-4">
-              Can't get a Zoom seat? We go live on{' '}
-              <span className="text-white/50">LinkedIn</span> — open to everyone.
-            </p>
           </MotionDiv>
         </div>
       </div>
