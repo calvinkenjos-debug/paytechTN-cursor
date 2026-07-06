@@ -179,24 +179,30 @@ Client-side rate limiting in `checkRateLimit()` prevents form submission spam us
 
 ## Common Tasks
 
-### Adding a New Event/Session
+### Events: upcoming vs past are two different mechanisms
 
-1. **Add to `data/pastSessions.ts`**:
-   ```typescript
-   {
-     id: "session-slug",        // Must be unique, kebab-case
-     title: "Session Title",
-     description: "...",
-     date: "DD Mon YYYY",
-     format: "In-Person • Location" or "Webinar",
-     imageSrc: "/path/or/https://...",
-     href: "#"
-   }
-   ```
+There are **two separate event surfaces** — don't confuse them:
 
-2. **Images**: Place in `public/` and reference as `/filename` or external URL.
+**Upcoming event** = a dedicated section component, `components/landing/UpcomingEventSection.tsx`, wired into `pages/Index.tsx` right after the hero (anchor `#upcoming-event`). It carries the full event details (date/time/format), a "what you'll hear" list, and the **Luma registration embed**. Registration is an embedded Luma iframe controlled by the `LUMA_EVENT_ID` constant at the top of that file:
+- Set `LUMA_EVENT_ID` to the Luma event's API id (`evt-xxxxxxxx`, from Luma → Event → Settings → Embed) to render the live registration form.
+- While it's empty, the section renders a "registration opening soon" fallback with a Luma link — safe to ship before the Luma page exists.
+- The `components/ui/AnnouncementBanner.tsx` pill also advertises the current upcoming event and scrolls to `#upcoming-event`; update its text when the event changes.
 
-3. **Rebuild**: Run `npm run build` to trigger prerender and generate static HTML.
+When an upcoming event finishes, move it into `data/pastSessions.ts` (below) and update/replace `UpcomingEventSection.tsx` for the next one.
+
+**Past sessions** = data-driven cards in `data/pastSessions.ts` (shown via the card stack / PreviousSessionsModal):
+```typescript
+{
+  id: "session-slug",        // Must be unique, kebab-case
+  title: "Session Title",
+  description: "...",
+  date: "DD Mon YYYY",
+  format: "In-Person • Location" or "Webinar",
+  imageSrc: "/path/or/https://...",
+  href: "#"
+}
+```
+Images: place in `public/` and reference as `/filename` or use an external URL. Then run `npm run build` to trigger prerender.
 
 ### Creating a New Component
 
@@ -323,6 +329,8 @@ mutation.mutate(value);  // Fires Convex mutation
 3. **Form validation errors not showing**: Check both client-side (Joi in `lib/validation.ts`) and server-side (Convex validators).
 4. **Images not loading**: Use relative paths `/filename` for files in `public/` or full HTTPS URLs. Avoid relative imports.
 5. **Environment variables not working**: Must restart dev server after updating `.env.local`. Vite reads env vars at build time.
+6. **Duplicate components — edit the right one**: The root `components/` folder holds legacy versions (`Hero.tsx`, `Events.tsx`, `Journey.tsx`, etc.) that are **not rendered**. The live page (`pages/Index.tsx`) imports only from `components/landing/`. Always edit the `landing/` version; the root duplicates are dead code pending cleanup.
+7. **`Index.tsx` composition**: Live section order is Hero → UpcomingEvent → Stats → Journey → Finzly → FinalCTA. `ClientsSection` is intentionally commented out (awaiting logo permissions). The old `EventsSection.tsx` (built for a past cross-border event) is no longer wired in.
 
 ---
 

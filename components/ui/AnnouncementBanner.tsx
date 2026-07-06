@@ -9,7 +9,7 @@ interface AnnouncementBannerProps {
 
 export const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({ onDismiss }) => {
   const scrollToEvents = () => {
-    const el = document.getElementById('events');
+    const el = document.getElementById('upcoming-event');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -38,9 +38,9 @@ export const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({ onDismis
                 style={{ background: '#ff5533' }}
               />
               <span className="font-medium text-white/80">
-                🎤 Next Event: <span className="text-white font-semibold">Instant Cross-Border Payments</span>
+                🎤 Next Event: <span className="text-white font-semibold">Rise of AI in Payments</span>
                 <span className="text-white/40 mx-2">·</span>
-                <span className="font-code text-xs tracking-wide" style={{ color: '#ff5533' }}>Mar 27 · 5 PM · Chennai</span>
+                <span className="font-code text-xs tracking-wide" style={{ color: '#ff5533' }}>Aug 7 · 5:30 PM IST · Virtual</span>
               </span>
               <ArrowRight
                 size={13}

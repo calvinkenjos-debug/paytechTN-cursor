@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import HeroSection from '../components/landing/HeroSection';
 // import ClientsSection from '../components/landing/ClientsSection'; // Temporarily hidden - will re-enable when we have logo permissions
+import UpcomingEventSection from '../components/landing/UpcomingEventSection';
 import StatsSection from '../components/landing/StatsSection';
 import JourneySection from '../components/landing/JourneySection';
 import FinzlySection from '../components/landing/FinzlySection';
@@ -35,6 +36,7 @@ const Index: React.FC = () => {
 
         <main>
             <HeroSection onOpenModal={openModal} />
+            <UpcomingEventSection />
             <StatsSection />
             {/* <ClientsSection /> */}
             <JourneySection />

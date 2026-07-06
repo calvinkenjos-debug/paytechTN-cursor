@@ -170,7 +170,7 @@ export const createAndNotify = action({
             <h1 style="color: #ff5533; font-size: 28px; margin-bottom: 20px;">Welcome to PayTechTN, ${firstName}! 👋</h1>
             
             <p style="font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 20px;">
-              Thank you for joining Tamil Nadu's premier payments and banking professional community. You're now part of a network of 500+ fintech engineers, architects, product managers, and innovators shaping the future of payments in India.
+              Thank you for joining Tamil Nadu's premier payments and banking professional community. You're now part of a network of 50+ fintech engineers, architects, product managers, and innovators shaping the future of payments in India.
             </p>
 
             <p style="font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 20px;">

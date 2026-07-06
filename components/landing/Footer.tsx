@@ -17,9 +17,8 @@ const Footer: React.FC<FooterProps> = ({ onCodeOfConductClick }) => {
                 <h4 className="font-code text-xs text-tertiary uppercase tracking-widest mb-6">Product</h4>
                 <ul className="space-y-4 font-body text-secondary text-sm">
                     <li><a href="#about" className="hover:text-accent transition-colors">Community</a></li>
-                    <li><a href="#events" className="hover:text-accent transition-colors">Events</a></li>
+                    <li><a href="#upcoming-event" className="hover:text-accent transition-colors">Events</a></li>
                     <li><a href="#join" className="hover:text-accent transition-colors">Sessions</a></li>
-                    <li><span className="text-tertiary">Blog (Coming Soon)</span></li>
                 </ul>
             </div>
 
@@ -28,7 +27,6 @@ const Footer: React.FC<FooterProps> = ({ onCodeOfConductClick }) => {
                 <ul className="space-y-4 font-body text-secondary text-sm">
                     <li><a href="#about" className="hover:text-accent transition-colors">About</a></li>
                     <li><a href="mailto:paytechtn@gmail.com" className="hover:text-accent transition-colors">Contact</a></li>
-                    <li><a href="#" className="hover:text-accent transition-colors">Partners</a></li>
                     <li>
                       <button 
                         onClick={onCodeOfConductClick}
@@ -53,14 +51,12 @@ const Footer: React.FC<FooterProps> = ({ onCodeOfConductClick }) => {
                         LinkedIn
                       </a>
                     </li>
-                    <li><span className="text-tertiary">Twitter (Coming Soon)</span></li>
-                    <li><span className="text-tertiary">Discord (Coming Soon)</span></li>
                 </ul>
             </div>
         </div>
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-tertiary">
-            <p>&copy; 2025 PayTechTN. Organized by Finzly.</p>
+            <p>&copy; 2026 PayTechTN. Organized by Finzly.</p>
             <p>Built by engineers. For the fintech community.</p>
         </div>
       </div>

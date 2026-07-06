@@ -110,14 +110,14 @@ async function main() {
 
     <!-- ── HERO: Definition block for "What is PayTechTN?" queries ── -->
     <section>
-      <h1>Fintech Community Chennai — Where Payments &amp; Banking Leaders Connect</h1>
+      <h2>Fintech Community Chennai — Where Payments &amp; Banking Leaders Connect</h2>
 
       <!-- Definition block (40-60 words — optimal for AI snippet extraction) -->
-      <p><strong>PayTechTN</strong> is Tamil Nadu&apos;s premier payments and banking professional community, connecting 500+ fintech engineers, architects, product managers, and innovators across Chennai. Members attend expert panel discussions, hands-on workshops, and networking events focused on payments technology, cross-border payments, SWIFT GPI, UPI, and banking infrastructure.</p>
+      <p><strong>PayTechTN</strong> is Tamil Nadu&apos;s premier payments and banking professional community, connecting 50+ fintech engineers, architects, product managers, and innovators across Chennai. Members attend expert panel discussions, hands-on workshops, and networking events focused on payments technology, cross-border payments, SWIFT GPI, UPI, and banking infrastructure.</p>
 
       <!-- Statistics block (+37% AI citation boost per Princeton GEO research) -->
       <ul aria-label="Community statistics">
-        <li>500+ payments and banking professionals in the community</li>
+        <li>50+ payments and banking professionals in the community</li>
         <li>6 events held since founding, covering AI in payments, instant cross-border payments, QA for instant payments, vibe coding, and AI-powered QA</li>
         <li>20+ industry leaders have spoken at PayTechTN events</li>
         <li>Members from banks, fintechs, and payment technology companies across Tamil Nadu</li>
@@ -155,7 +155,7 @@ async function main() {
 
       <details>
         <summary><strong>What is PayTechTN?</strong></summary>
-        <p>PayTechTN is Tamil Nadu&apos;s premier payments and banking professional community based in Chennai. It connects 500+ fintech engineers, architects, product managers, and innovators through expert panel discussions, networking events, and workshops focused on payments technology, cross-border payments, SWIFT GPI, UPI, and fintech infrastructure.</p>
+        <p>PayTechTN is Tamil Nadu&apos;s premier payments and banking professional community based in Chennai. It connects 50+ fintech engineers, architects, product managers, and innovators through expert panel discussions, networking events, and workshops focused on payments technology, cross-border payments, SWIFT GPI, UPI, and fintech infrastructure.</p>
       </details>
 
       <details>
@@ -165,7 +165,7 @@ async function main() {
 
       <details>
         <summary><strong>How do I join PayTechTN?</strong></summary>
-        <p>Join PayTechTN for free at paytechtn.com. Fill out the signup form with your name, email, WhatsApp number, LinkedIn profile, and current role. Membership is free and gives you access to event invites, session resources, and a network of 500+ payments and banking professionals.</p>
+        <p>Join PayTechTN for free at paytechtn.com. Fill out the signup form with your name, email, WhatsApp number, LinkedIn profile, and current role. Membership is free and gives you access to event invites, session resources, and a network of 50+ payments and banking professionals.</p>
       </details>
 
       <details>

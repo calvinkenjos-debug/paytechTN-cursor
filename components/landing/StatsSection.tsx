@@ -11,14 +11,14 @@ const stats = [
   },
   {
     icon: Calendar,
-    value: '5',
+    value: '6',
     label: 'Events',
     color: '#ff5533',
   },
   {
     icon: TrendingUp,
-    value: '500+',
-    label: 'Professionals Attended',
+    value: '50+',
+    label: 'Community Members',
     color: '#ff5533',
   },
 ];

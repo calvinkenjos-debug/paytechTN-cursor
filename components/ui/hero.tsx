@@ -9,11 +9,12 @@ interface ShaderShowcaseProps {
   onOpenModal?: () => void;
 }
 
+// Decorative brand circles — not real member photos, so nothing is misrepresented.
 const avatarUrls = [
-  { imageUrl: "https://avatars.githubusercontent.com/u/16860528", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/20110627", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/106103625", profileUrl: "#" },
-  { imageUrl: "https://avatars.githubusercontent.com/u/59228569", profileUrl: "#" },
+  { gradient: "linear-gradient(135deg, #ff5533, #b8331c)" },
+  { gradient: "linear-gradient(135deg, #2F5C63, #16333a)" },
+  { gradient: "linear-gradient(135deg, #ff8a5c, #ff5533)" },
+  { gradient: "linear-gradient(135deg, #3a3a3a, #111111)" },
 ];
 
 export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
