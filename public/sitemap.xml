@@ -3,13 +3,13 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.paytechtn.com/</loc>
-    <lastmod>2026-03-19</lastmod>
+    <lastmod>2026-07-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://www.paytechtn.com/event-cross-border.png</image:loc>
-      <image:title>Instant Cross-Border Payments — PayTechTN Event, March 27 2026, Chennai</image:title>
-      <image:caption>Panel Discussion and Networking Mixer on cross-border payments, SWIFT GPI, real-time settlement and FX liquidity</image:caption>
+      <image:loc>https://www.paytechtn.com/rise-of-ai-in-payments.jpg</image:loc>
+      <image:title>Rise of AI in Payments — PayTechTN Event, August 07 2026, Virtual</image:title>
+      <image:caption>Free virtual session on real-world Agentic AI use cases in payments, hosted by PayTechTN, August 7 2026, 5:30-6:30 PM IST</image:caption>
     </image:image>
   </url>
 </urlset>
