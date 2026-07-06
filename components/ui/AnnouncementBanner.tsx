@@ -1,46 +1,45 @@
 import React from 'react';
 import { ArrowRight, X } from 'lucide-react';
 import { AnimatedShinyText } from './animated-shiny-text';
-import { cn } from '../../lib/utils';
 
 interface AnnouncementBannerProps {
   onDismiss: () => void;
 }
 
 export const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({ onDismiss }) => {
-  const scrollToEvents = () => {
+  const scrollToEvent = () => {
     const el = document.getElementById('upcoming-event');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div className="relative z-50 w-full bg-black border-b border-white/5">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center gap-3">
-
-        {/* Clickable announcement pill */}
+    <div className="fixed top-0 inset-x-0 z-[6000] w-full bg-black/90 backdrop-blur-md border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center">
+        {/* Clickable shiny announcement pill */}
         <button
-          onClick={scrollToEvents}
-          className={cn(
-            "group flex-1 flex justify-center",
-          )}
+          onClick={scrollToEvent}
+          className="group flex justify-center"
+          aria-label="Rise of AI in Payments — August 7. Jump to event details."
         >
-          <div
-            className={cn(
-              "group rounded-full border border-white/10 bg-neutral-900 hover:bg-neutral-800 transition-all ease-in hover:cursor-pointer",
-            )}
-          >
+          <div className="group inline-flex items-center rounded-full border border-white/10 bg-neutral-900/80 hover:bg-neutral-800 transition-colors duration-200">
             <AnimatedShinyText
-              shimmerWidth={200}
-              className="inline-flex items-center justify-center gap-2 px-4 py-1.5 text-sm transition ease-out hover:text-white hover:duration-300"
+              shimmerWidth={220}
+              className="inline-flex items-center justify-center gap-2 px-4 py-1.5 text-sm"
             >
               <span
                 className="inline-block w-2 h-2 rounded-full animate-pulse flex-shrink-0"
                 style={{ background: '#ff5533' }}
               />
               <span className="font-medium text-white/80">
-                🎤 Next Event: <span className="text-white font-semibold">Rise of AI in Payments</span>
-                <span className="text-white/40 mx-2">·</span>
-                <span className="font-code text-xs tracking-wide" style={{ color: '#ff5533' }}>Aug 7 · 5:30 PM IST · Virtual</span>
+                Next event:{' '}
+                <span className="text-white font-semibold">Rise of AI in Payments</span>
+                <span className="hidden sm:inline text-white/30 mx-2">·</span>
+                <span
+                  className="hidden sm:inline font-code text-xs tracking-wide"
+                  style={{ color: '#ff5533' }}
+                >
+                  Aug 7 · 5:30 PM IST · Virtual
+                </span>
               </span>
               <ArrowRight
                 size={13}
@@ -53,12 +52,11 @@ export const AnnouncementBanner: React.FC<AnnouncementBannerProps> = ({ onDismis
         {/* Dismiss button */}
         <button
           onClick={onDismiss}
-          className="absolute right-4 p-1 text-white/20 hover:text-white/60 transition-colors flex-shrink-0"
+          className="absolute right-4 p-1 text-white/25 hover:text-white/60 transition-colors flex-shrink-0"
           aria-label="Dismiss announcement"
         >
           <X size={14} />
         </button>
-
       </div>
     </div>
   );
