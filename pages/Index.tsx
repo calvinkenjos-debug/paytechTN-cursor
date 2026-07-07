@@ -11,14 +11,12 @@ import { SignUpModal } from '../components/ui/SignUpModal';
 import { PreviousSessionsModal } from '../components/ui/PreviousSessionsModal';
 import { CodeOfConductModal } from '../components/ui/CodeOfConductModal';
 import { FloatingNav } from '../components/ui/floating-navbar';
-import { AnnouncementBanner } from '../components/ui/AnnouncementBanner';
 import { User } from 'lucide-react';
 
 const Index: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPastSessionsOpen, setIsPastSessionsOpen] = useState(false);
   const [isCodeOfConductOpen, setIsCodeOfConductOpen] = useState(false);
-  const [showBanner, setShowBanner] = useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const openPastSessions = () => setIsPastSessionsOpen(true);
@@ -34,8 +32,7 @@ const Index: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background text-primary selection:bg-accent selection:text-background tech-grid overflow-hidden">
-        {showBanner && <AnnouncementBanner onDismiss={() => setShowBanner(false)} />}
-        <FloatingNav navItems={navItems} onJoinClick={openModal} hasBanner={showBanner} />
+        <FloatingNav navItems={navItems} onJoinClick={openModal} />
 
         <main>
             <HeroSection onOpenModal={openModal} />

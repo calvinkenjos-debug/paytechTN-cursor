@@ -4,17 +4,19 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { AvatarCircles } from "./avatar-circles"
 import { ShaderGradientBackground } from "./shader-gradient-background"
+import { AnnouncementBanner } from "./AnnouncementBanner"
 
 interface ShaderShowcaseProps {
   onOpenModal?: () => void;
 }
 
-// Decorative brand circles — not real member photos, so nothing is misrepresented.
+// Community avatar cluster. Placeholder headshots — swap for real member /
+// speaker photos when available (each entry takes an imageUrl).
 const avatarUrls = [
-  { gradient: "linear-gradient(135deg, #ff5533, #b8331c)" },
-  { gradient: "linear-gradient(135deg, #2F5C63, #16333a)" },
-  { gradient: "linear-gradient(135deg, #ff8a5c, #ff5533)" },
-  { gradient: "linear-gradient(135deg, #3a3a3a, #111111)" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/16860528", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/20110627", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/106103625", profileUrl: "#" },
+  { imageUrl: "https://avatars.githubusercontent.com/u/59228569", profileUrl: "#" },
 ];
 
 export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
@@ -53,6 +55,16 @@ export default function ShaderShowcase({ onOpenModal }: ShaderShowcaseProps) {
       <main className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-16 sm:pt-20 pb-8 sm:pb-0">
 
         <div className="text-left max-w-4xl">
+
+          {/* ANNOUNCEMENT: floats between the nav and the headline, over the video */}
+          <motion.div
+            className="mb-6 md:mb-8"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <AnnouncementBanner />
+          </motion.div>
 
           {/* HEADLINE: Optimized typography following UI/UX best practices */}
           <div className="mb-5 md:mb-6 text-white">

@@ -12,7 +12,6 @@ export const FloatingNav = ({
   navItems,
   className,
   onJoinClick,
-  hasBanner = false,
 }: {
   navItems: {
     name: string;
@@ -21,7 +20,6 @@ export const FloatingNav = ({
   }[];
   className?: string;
   onJoinClick?: () => void;
-  hasBanner?: boolean;
 }) => {
   // changed from scrollYProgress to scrollY for pixel-perfect control
   const { scrollY } = useScroll();
@@ -56,9 +54,7 @@ export const FloatingNav = ({
           y: -100,
         }}
         animate={{
-          // Sit below the announcement bar when it's present; tuck fully out of
-          // view when hidden (larger offset so it clears the taller top gap).
-          y: visible ? (hasBanner ? 48 : 0) : -160,
+          y: visible ? 0 : -100,
           opacity: visible ? 1 : 0,
         }}
         transition={{
