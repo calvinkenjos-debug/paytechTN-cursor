@@ -18,7 +18,7 @@ export const AnnouncementBanner: React.FC = () => {
     <button
       onClick={scrollToEvent}
       className="group inline-flex"
-      aria-label="Rise of AI in Payments, August 7 — jump to event details"
+      aria-label="Rise of AI in Payments, August 6 — jump to event details"
     >
       <div className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md shadow-[0_8px_30px_-12px_rgba(0,0,0,0.6)] transition-colors duration-200 hover:bg-white/[0.1] hover:border-white/25">
         <AnimatedShinyText
@@ -37,7 +37,7 @@ export const AnnouncementBanner: React.FC = () => {
               className="hidden sm:inline font-code text-xs tracking-wide"
               style={{ color: '#ff5533' }}
             >
-              Aug 7 · 5:30 PM IST
+              Aug 6 · 5:30 PM IST
             </span>
           </span>
           <ArrowRight

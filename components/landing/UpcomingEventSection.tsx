@@ -66,7 +66,7 @@ const UpcomingEventSection: React.FC = () => {
               <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
                 <img
                   src="/rise-of-ai-in-payments.jpg"
-                  alt="Rise of AI in Payments — PayTechTN virtual session, August 7 2026, 5:30–6:30 PM IST"
+                  alt="Rise of AI in Payments — PayTechTN virtual session, August 6 2026, 5:30–6:30 PM IST"
                   width={1200}
                   height={1200}
                   loading="lazy"
@@ -128,8 +128,8 @@ const UpcomingEventSection: React.FC = () => {
                   <Calendar size={11} className="text-accent" />
                   <span className="font-code text-[10px] tracking-widest uppercase text-white/30">Date</span>
                 </div>
-                <div className="font-bold text-lg text-white leading-none">Aug 7</div>
-                <div className="text-xs text-white/30 mt-1">Fri · 2026</div>
+                <div className="font-bold text-lg text-white leading-none">Aug 6</div>
+                <div className="text-xs text-white/30 mt-1">Thu · 2026</div>
               </div>
               <div className="p-4">
                 <div className="flex items-center gap-1.5 mb-2">
