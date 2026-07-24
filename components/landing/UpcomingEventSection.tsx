@@ -8,17 +8,12 @@ const MotionDiv = motion.div as any;
  * Luma registration.
  *
  * LUMA_EVENT_ID is the event's API id (Luma → Event → Settings → "Embed",
- * looks like `evt-xxxxxxxx`). While it's empty the panel shows a
- * "registration opening soon" state instead of a broken button.
- *
- * Uses Luma's checkout-button overlay (script loaded in index.html) rather
- * than the boxed "simple" iframe: the iframe's registration page (8 custom
- * questions) renders taller than any fixed height, forcing an ugly nested
- * scrollbar. The overlay button has no height to guess and opens Luma's own
- * checkout as a full modal instead.
+ * looks like `evt-xxxxxxxx`). Session is postponed (date TBD), so the CTA
+ * is force-disabled below regardless of this value — flip EVENT_POSTPONED
+ * back to false once a new date is confirmed and this reactivates checkout.
  */
 const LUMA_EVENT_ID = 'evt-Uu241H0X6C9cLV2';
-const LUMA_EVENT_URL = `https://luma.com/event/${LUMA_EVENT_ID}`;
+const EVENT_POSTPONED = true;
 
 const highlights = [
   'Real Agentic AI use cases in payments — from investigations and exception handling to embedded payments.',
@@ -66,12 +61,23 @@ const UpcomingEventSection: React.FC = () => {
               <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
                 <img
                   src="/rise-of-ai-in-payments.jpg"
-                  alt="Rise of AI in Payments — PayTechTN virtual session, August 6 2026, 5:30–6:30 PM IST"
+                  alt="Rise of AI in Payments — PayTechTN virtual session, new date coming soon"
                   width={1200}
                   height={1200}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
+                {/* Postponed overlay — the poster graphic has the old date baked in, so this must sit on top of it to avoid conflicting info */}
+                {EVENT_POSTPONED && (
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-10 pb-5 px-5">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                      <span className="font-code text-[11px] tracking-widest uppercase text-accent">
+                        Postponed · New Date Coming Soon
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -101,13 +107,19 @@ const UpcomingEventSection: React.FC = () => {
           >
             {/* Format badges */}
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-2 font-code text-[11px] tracking-widest uppercase text-accent border border-accent/25 bg-accent/[0.08] rounded-full px-3 py-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="inline-flex items-center gap-2 font-code text-[11px] tracking-widest uppercase text-white/40 border border-white/15 bg-white/[0.04] rounded-full px-3 py-1">
                 Virtual Session
               </span>
-              <span className="font-code text-[11px] tracking-widest uppercase text-white/25">
-                · Free · 60 min
-              </span>
+              {EVENT_POSTPONED ? (
+                <span className="inline-flex items-center gap-2 font-code text-[11px] tracking-widest uppercase text-accent border border-accent/25 bg-accent/[0.08] rounded-full px-3 py-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                  Postponed
+                </span>
+              ) : (
+                <span className="font-code text-[11px] tracking-widest uppercase text-white/25">
+                  · Free · 60 min
+                </span>
+              )}
             </div>
 
             {/* Title + tagline */}
@@ -125,18 +137,18 @@ const UpcomingEventSection: React.FC = () => {
             <div className="grid grid-cols-3 rounded-xl border border-white/10 divide-x divide-white/10 overflow-hidden">
               <div className="p-4">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <Calendar size={11} className="text-accent" />
+                  <Calendar size={11} className="text-white/40" />
                   <span className="font-code text-[10px] tracking-widest uppercase text-white/30">Date</span>
                 </div>
-                <div className="font-bold text-lg text-white leading-none">Aug 6</div>
-                <div className="text-xs text-white/30 mt-1">Thu · 2026</div>
+                <div className="font-bold text-lg text-white leading-none">Coming Soon</div>
+                <div className="text-xs text-white/30 mt-1">2026</div>
               </div>
               <div className="p-4">
                 <div className="flex items-center gap-1.5 mb-2">
                   <Clock size={11} className="text-white/40" />
                   <span className="font-code text-[10px] tracking-widest uppercase text-white/30">Time</span>
                 </div>
-                <div className="font-bold text-lg text-white leading-none">5:30 PM</div>
+                <div className="font-bold text-lg text-white leading-none">TBD</div>
                 <div className="text-xs text-white/30 mt-1">IST · 60 min</div>
               </div>
               <div className="p-4">
@@ -158,7 +170,7 @@ const UpcomingEventSection: React.FC = () => {
                 <div className="flex items-center gap-2 mb-5">
                   <Calendar size={13} className="text-accent" />
                   <span className="font-code text-[11px] tracking-widest uppercase text-white/50">
-                    Save your seat
+                    {EVENT_POSTPONED ? 'What to expect' : 'Save your seat'}
                   </span>
                 </div>
 
@@ -171,9 +183,17 @@ const UpcomingEventSection: React.FC = () => {
                   ))}
                 </div>
 
-                {LUMA_EVENT_ID ? (
+                {EVENT_POSTPONED ? (
+                  /* Session postponed — CTA disabled so no one books a slot that no longer holds */
+                  <div className="mt-6 flex flex-col items-center text-center gap-3 rounded-xl border border-dashed border-accent/20 bg-accent/[0.03] px-6 py-8">
+                    <p className="font-bold text-white text-sm">New date coming soon</p>
+                    <p className="text-secondary text-xs max-w-xs">
+                      This session has been postponed. We'll announce the new date and open registration here first.
+                    </p>
+                  </div>
+                ) : LUMA_EVENT_ID ? (
                   <motion.a
-                    href={LUMA_EVENT_URL}
+                    href={`https://luma.com/event/${LUMA_EVENT_ID}`}
                     data-luma-action="checkout"
                     data-luma-event-id={LUMA_EVENT_ID}
                     target="_blank"
@@ -204,10 +224,12 @@ const UpcomingEventSection: React.FC = () => {
                   </div>
                 )}
 
-                <p className="text-center text-xs text-white/30 mt-4">
-                  No Zoom seat? We go live on{' '}
-                  <span className="text-white/50">LinkedIn</span> — open to everyone.
-                </p>
+                {!EVENT_POSTPONED && (
+                  <p className="text-center text-xs text-white/30 mt-4">
+                    No Zoom seat? We go live on{' '}
+                    <span className="text-white/50">LinkedIn</span> — open to everyone.
+                  </p>
+                )}
               </div>
             </div>
           </MotionDiv>
