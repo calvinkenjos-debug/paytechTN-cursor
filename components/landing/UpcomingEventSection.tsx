@@ -61,23 +61,12 @@ const UpcomingEventSection: React.FC = () => {
               <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
                 <img
                   src="/rise-of-ai-in-payments.jpg"
-                  alt="Rise of AI in Payments — PayTechTN virtual session, new date coming soon"
+                  alt="Rise of AI in Payments — PayTechTN virtual session postponed, recalibrating, new date coming soon"
                   width={1200}
                   height={1200}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
-                {/* Postponed overlay — the poster graphic has the old date baked in, so this must sit on top of it to avoid conflicting info */}
-                {EVENT_POSTPONED && (
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-10 pb-5 px-5">
-                    <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                      <span className="font-code text-[11px] tracking-widest uppercase text-accent">
-                        Postponed · New Date Coming Soon
-                      </span>
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
 
